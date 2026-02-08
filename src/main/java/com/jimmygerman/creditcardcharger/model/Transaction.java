@@ -1,6 +1,7 @@
 package com.jimmygerman.creditcardcharger.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDateTime;
 
@@ -15,10 +16,17 @@ public class Transaction
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Card holder is required")
     private String cardHolder;
 
+    @NotNull(message = "Amount is required")
+    @Min(value = 1, message = "Amount must be at least 1")
     private Double amount;
+
+    @NotBlank(message = "Merchant is required")
     private String merchant;
+
+    @NotBlank(message = "Category is required")
     private String category;
     private LocalDateTime date;
 
